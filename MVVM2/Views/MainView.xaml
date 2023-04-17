@@ -1,0 +1,26 @@
+﻿<Window x:Class="MVVM2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVM2"
+        xmlns:local1="clr-namespace:MVVM2.ViewsModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local1:MainViewModel></local1:MainViewModel>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition  Height="5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <Button HorizontalAlignment="Left" Width="100" Height="35" Margin="5" FontSize="20" Command="{Binding ShowMainPage}">Main Page</Button>
+        <UserControl Grid.Row="1" Content="{Binding CurrentPage}" Loaded="UserControl_Loaded"></UserControl>
+        
+
+        </Grid>
+</Window>

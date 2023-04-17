@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="MVVM2.Views.APIViewPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Button Width="100" Height="35" Command="{Binding GetCurreencyesCommand}">Get Currencies</Button>
+        <StackPanel Grid.Row="2">
+            <Button Command="{Binding SortByNameCommand}">SortByName</Button>
+            <Button Command="{Binding SortByPriceUsdCommand}">SortByPriceUsd</Button>
+            <TextBox x:Name="txt">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyDown">
+                        <i:InvokeCommandAction Command="{Binding FilterTextChangedCommand}" CommandParameter="{Binding ElementName=txt, Path=Text}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </StackPanel>
+        
+
+
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding Currensies}"
+                 SelectedItem="{Binding SelectedCurrensy}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ShowAboutPageCommand}"></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    
+                    <Border
+                            BorderBrush="Black"
+                            BorderThickness="3"
+                            CornerRadius="0"
+                            Width="200"
+                             Margin="25"
+                            >
+                        <Border
+                            BorderThickness="1.75"
+                            CornerRadius="0"
+                            Width="200"
+                            Margin="8">
+                               
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Name}"  Background="Transparent" Margin="10"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding PriceUsd}"  Background="Transparent" Margin="10"></TextBlock>
+                                </StackPanel>
+                        </Border>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
